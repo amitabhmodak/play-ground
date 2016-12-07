@@ -1,5 +1,12 @@
 ipch/
 x64/ 
 *.db
- 
+*.o
+*.lib
+*.so
+*.dll
+*.exe
+*.out
+*.swp
+.*.swp 
 *.opendb
