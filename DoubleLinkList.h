@@ -7,11 +7,10 @@ namespace dlinklist{
 	struct Node {
 	public:
 		T m_data;
-		std::unique_ptr<Node<T>> m_next = nullptr;
-		Node<T>* m_previous = nullptr;
-		Node(T value) {
-			m_data = value;
-		}
+		std::unique_ptr<Node<T>> m_next  ;
+		Node<T>* m_previous  = nullptr;
+
+		Node(T value) :m_data(value) {}
 		~Node() = default;// {std::cout << "Element removed with value " << m_data <<"\n";}
 	};
 

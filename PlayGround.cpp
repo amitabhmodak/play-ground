@@ -22,6 +22,7 @@ int main()
 		d.test();
 	}
 	
+	std::cout << "\nKey to exit\n";
 	_getch();
 	return 0;
 }

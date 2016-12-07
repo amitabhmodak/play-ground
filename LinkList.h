@@ -7,10 +7,7 @@ template <typename T>
 struct Node {
 	T m_data;
 	std::unique_ptr<Node<T>> m_next;
-	Node(T value) {
-		m_data = value;
-		m_next = nullptr;
-	}
+	Node(T value) :m_data(value) {}
 	~Node() = default;
 };
 
