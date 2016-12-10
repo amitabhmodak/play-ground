@@ -13,3 +13,5 @@ packages/
 *.swp
 .*.swp 
 *.opendb
+*.user
+*.suo

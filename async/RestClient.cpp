@@ -8,8 +8,7 @@ http://docs.microsofttranslator.com/text-translate.html#!/default/get_Translate
 #include "RestClient.h"
 
 pplx::task<std::wstring> RestClient::getAuthToken() {
-	return pplx::create_task([]
-	{
+	return pplx::create_task([]	{
 		std::wstring str;
 		http_client client(U("https://api.cognitive.microsoft.com/sts/v1.0/issueToken"));
 		uri_builder builder;
@@ -17,10 +16,8 @@ pplx::task<std::wstring> RestClient::getAuthToken() {
 	 
 		return client.request(methods::POST, builder.to_string());
 	})
-	.then([=](http_response response)
-	{
-		if (response.status_code() == status_codes::OK)
-		{
+	.then([=](http_response response)	{
+		if (response.status_code() == status_codes::OK)		{
 			return getResponseBody(response);
 		}
 		else {
@@ -34,8 +31,7 @@ pplx::task<std::wstring> RestClient::getAuthToken() {
  
 
 pplx::task<std::wstring> RestClient::translate(std::wstring translateText, std::wstring language) {
-	return pplx::create_task([=]
-	{
+	return pplx::create_task([=]{
 		return getAuthToken();
 	})
 	.then([=](std::wstring key) {
@@ -49,10 +45,8 @@ pplx::task<std::wstring> RestClient::translate(std::wstring translateText, std::
 		req.set_request_uri(builder.to_string());
 		return client.request(req);
 	})
-	.then([=](http_response response)
-	{
-		if (response.status_code() == status_codes::OK)
-		{
+	.then([=](http_response response){
+		if (response.status_code() == status_codes::OK) {
 			return getResponseBody(response);
 		}
 		else {
