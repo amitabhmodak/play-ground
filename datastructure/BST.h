@@ -56,6 +56,8 @@ namespace bst {
  
 		void inorder() {
 			std::cout << "Inorder :\n";
+			if (m_root == nullptr)
+				return;
 			std::stack<std::shared_ptr<Node<T>>> stack;
 			auto node = m_root;
 
@@ -77,6 +79,8 @@ namespace bst {
 
 		void inorderSingleLoop() {
 			std::cout << "InorderSingleLoop :\n";
+			if (m_root == nullptr)
+				return;
 			std::stack<std::shared_ptr<Node<T>>> stack;
 			auto node = m_root;
 			 
@@ -98,6 +102,8 @@ namespace bst {
 
 		void preorder() {
 			std::cout << "Preorder :\n";
+			if (m_root == nullptr)
+				return;
 			std::stack<std::shared_ptr<Node<T>>> stack;
 			auto node = m_root;
 			while (node != nullptr || !stack.empty()) {
@@ -118,6 +124,8 @@ namespace bst {
 
 		void preorderSingleLoop() {
 			std::cout << "PreorderSingleLoop :\n";
+			if (m_root == nullptr)
+				return;
 			std::stack<std::shared_ptr<Node<T>>> stack;
 			auto node = m_root;
 			stack.push(node);
@@ -135,6 +143,8 @@ namespace bst {
 
 		void postorder() {
 			std::cout << "Postorder :\n";
+			if (m_root == nullptr)
+				return;
 			std::stack<std::shared_ptr<Node<T>>> stack;
 		 
 			auto node = m_root;
