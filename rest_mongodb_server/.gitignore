@@ -1,0 +1,15 @@
+ipch/
+x64/ 
+Debug/
+packages/
+*.txt
+*.db
+*.o
+*.lib
+*.so
+*.dll
+*.exe
+*.out
+*.swp
+.*.swp 
+*.opendb
