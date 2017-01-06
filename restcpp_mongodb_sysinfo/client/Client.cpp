@@ -2,16 +2,39 @@
 #include "DeviceInfo.h"
 #include "Utlity.h"
 #include "RestClient.h"
+#include <chrono>  
 
 Client::Client(std::string mail, std::unique_ptr<IMessageHandler> handler){
 	m_mail = Utlity::s2ws(mail);
 	m_messageHandler = std::move(handler);
+	m_threadRun = 1;
 }
 
 
 Client::~Client(){
 }
 
+void Client::run() {
+	m_worker = std::make_unique<std::thread>([this]() {
+		this->start();
+	});
+}
+bool  Client::threadRun() {
+	{
+		std::unique_lock <std::mutex> lock(m_triggerLock);
+		m_trigger.wait_for(lock, std::chrono::seconds(300));
+	}
+	if (m_threadRun.load() == 1)
+		return true;
+	return false;
+}
+
+
+void Client::stop() {
+	m_threadRun = 0;
+	m_trigger.notify_one();
+	m_worker->join();
+}
 void Client::start() {
 	
  	if (isDeviceRegistered()) {
@@ -25,7 +48,7 @@ void Client::start() {
 
 	std::wcout <<"Key "<< m_key;
 	 
-    while (true) 
+    while (threadRun())
 	{
 		auto cpuUsage = m_info.getCpuUsage();
 		auto memoryUsage = m_info.getMemoryUsage();
@@ -33,7 +56,7 @@ void Client::start() {
 		publishCpu(cpuUsage);
 		publishMemory(memoryUsage);
 		publishProcessList(processList); 
-	 	Sleep(50000);
+	  
 	}
 }
 

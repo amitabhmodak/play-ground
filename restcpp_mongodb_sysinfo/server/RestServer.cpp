@@ -9,7 +9,8 @@ using namespace web::http::experimental::listener;
 
 int RestServer::start(int port) {
 	std::wstringstream url;
-	url << L"http://*:" << port;
+	//url << L"http://*:" << port;
+	url << L"http://localhost:" << port;
 	m_listener = std::make_unique<http_listener>(url.str()); 
 	createRoutes();
 	try

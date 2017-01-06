@@ -15,3 +15,7 @@ packages/
 *.opendb
 *.user
 *.suo
+*.iobj
+restcpp_mongodb_sysinfo/bin/ClientConsolApp.ipdb
+*.ipdb
+restcpp_mongodb_sysinfo/build/client/ClientConsolApp/client.log

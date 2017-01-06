@@ -70,10 +70,7 @@ class Logger
  	Logger() {
  	}
 	~Logger() {
-		std::lock_guard<std::mutex> guard(m_lock);
-		if (m_fileStream.is_open()) {
- 			m_fileStream.close();
-		}
+		closeFile();
 	};
 	ostream m_fileStream;
 	std::mutex m_lock;
@@ -109,5 +106,12 @@ public:
 	}
 	void logText(std::wstring text) {
 		logText(Utlity::ws2s(text));
+	}
+
+	void closeFile() {
+		std::lock_guard<std::mutex> guard(m_lock);
+		if (m_fileStream.is_open()) {
+			m_fileStream.close();
+		}
 	}
 };
